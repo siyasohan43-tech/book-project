@@ -1,35 +1,42 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
+// Import your pages
 import Home from "./user/Home";
-import Navbar from "./components/Navbar";
+import Login from "./user/Login";
+import SignupPage from "./user/SignupPage";
+import Profile from "./user/Profile";
+import BookDetails from "./user/BookDetails";
+import AdminDashboard from "./admin/AdminDashboard";
 
-// Protected Route wrapper
-const PrivateRoute = ({ children }) => {
-  const { token } = useContext(AuthContext);
-  return token ? children : <Navigate to="/login" />;
-};
-
-export default function App() {
+const App = () => {
   return (
     <Router>
-      <Navbar />
       <Routes>
-        
 
-        {/* Protected Home Route */}
+        {/* USER ROUTES */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignupPage />} />
+
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/book/:id" element={<BookDetails />} />
+
+        {/* ADMIN ROUTE */}
+        <Route path="/admin" element={<AdminDashboard />} />
+
+        {/* FALLBACK ROUTE */}
         <Route
-          path="/"
+          path="*"
           element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
+            <div className="min-h-screen flex items-center justify-center text-3xl">
+              404 | Page Not Found 😢
+            </div>
           }
         />
-
-</Routes>
+      </Routes>
     </Router>
   );
-}
+};
+
+export default App;
