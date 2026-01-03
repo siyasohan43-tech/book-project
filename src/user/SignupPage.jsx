@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function SignupPage() {
@@ -11,7 +10,7 @@ function SignupPage() {
     education: "",
     phone: "",
     password: "",
-    agreedToTerms: false
+    agreedToTerms: false,
   });
 
   const navigate = useNavigate();
@@ -20,34 +19,31 @@ function SignupPage() {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!formData.agreedToTerms) {
-      alert("You must agree to the terms and conditions.");
+      alert(
+        "You must agree to the terms and conditions. Note: If a book is not returned or is damaged, a fine will be charged."
+      );
       return;
     }
-
-    try {
-      await axios.post("http://localhost:5000/api/auth/signup", formData);
-      alert("Signup successful!");
-      navigate("/login");
-    } catch (err) {
-      alert(err.response?.data?.message || "Signup failed");
-    }
+    // For frontend-only demo, just show alert and redirect
+    alert("Signup successful!");
+    navigate("/login");
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
+    <div className="flex justify-center items-center min-h-screen bg-[#f5e9dc] px-4">
       <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">Create Account</h2>
+        <h2 className="text-3xl font-bold text-center text-[#6F4E37] mb-6">
+          Create Account
+        </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-
           <input
             type="text"
             name="name"
@@ -55,9 +51,8 @@ function SignupPage() {
             required
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-[#d4a373]"
           />
-
           <input
             type="text"
             name="place"
@@ -65,9 +60,8 @@ function SignupPage() {
             required
             value={formData.place}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-[#d4a373]"
           />
-
           <input
             type="number"
             name="age"
@@ -75,19 +69,17 @@ function SignupPage() {
             required
             value={formData.age}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-[#d4a373]"
           />
-
           <input
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="Email ID"
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-[#d4a373]"
           />
-
           <input
             type="text"
             name="education"
@@ -95,9 +87,8 @@ function SignupPage() {
             required
             value={formData.education}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-[#d4a373]"
           />
-
           <input
             type="text"
             name="phone"
@@ -105,9 +96,8 @@ function SignupPage() {
             required
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-[#d4a373]"
           />
-
           <input
             type="password"
             name="password"
@@ -115,31 +105,36 @@ function SignupPage() {
             required
             value={formData.password}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+            className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-[#d4a373]"
           />
 
-          <label className="flex items-center space-x-2 text-gray-700">
+          <label className="flex items-start space-x-2 text-gray-700">
             <input
               type="checkbox"
               name="agreedToTerms"
               checked={formData.agreedToTerms}
               onChange={handleChange}
-              className="form-checkbox h-5 w-5 text-blue-600"
+              className="form-checkbox h-5 w-5 text-[#6F4E37] mt-1"
             />
-            <span>I agree to the terms and conditions</span>
+            <span>
+              I agree to the <strong>terms and conditions</strong> (If a book is
+              not returned or damaged, a fine will be charged)
+            </span>
           </label>
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+            className="w-full bg-[#6F4E37] text-white py-2 rounded-lg hover:bg-[#4a3f35] transition"
           >
             Sign Up
           </button>
         </form>
 
-        <p className="text-center mt-4 text-gray-600">
+        <p className="text-center mt-4 text-gray-700">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-600 hover:underline">Login</a>
+          <a href="/login" className="text-[#6F4E37] hover:underline">
+            Login
+          </a>
         </p>
       </div>
     </div>

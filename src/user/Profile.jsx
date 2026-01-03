@@ -2,41 +2,16 @@ import React from "react";
 
 const Profile = () => {
   return (
-    <div className="min-h-screen bg-gray-100 p-10 flex justify-center">
-      <div className="bg-white shadow-xl p-8 rounded-3xl w-full max-w-2xl">
+    <div className="pt-24 p-6">
+      <div className="bg-[#fff7ed] p-8 rounded-2xl shadow-lg max-w-lg mx-auto border">
+        <h2 className="text-3xl font-bold mb-4 text-[#4a3f35]">My Profile</h2>
 
-        <h2 className="text-3xl font-semibold mb-6 text-gray-800">My Profile</h2>
+        <p><strong>Name:</strong> Demo User</p>
+        <p><strong>Email:</strong> user@example.com</p>
 
-        <div className="space-y-4">
-          <input
-            type="text"
-            placeholder="Name"
-            className="w-full border p-3 rounded-xl"
-          />
-          <input
-            type="text"
-            placeholder="Place"
-            className="w-full border p-3 rounded-xl"
-          />
-          <input
-            type="text"
-            placeholder="Age"
-            className="w-full border p-3 rounded-xl"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full border p-3 rounded-xl"
-          />
-
-          <button className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700">
-            Update Profile
-          </button>
-
-          <p className="text-gray-700 font-semibold mt-3">
-            📘 Books Rented: <span className="text-blue-600">3</span>
-          </p>
-        </div>
+        <button className="mt-6 bg-red-500 text-white py-2 px-4 rounded-xl hover:bg-red-600">
+          Logout
+        </button>
       </div>
     </div>
   );

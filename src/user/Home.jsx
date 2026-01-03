@@ -6,35 +6,32 @@ const Home = () => {
   const [books, setBooks] = useState([]);
 
   // 20 frontend sample books
-  const fallbackBooks = [
-    { id: 1, title: "The Silent Library", author: "Aria Bloom" },
-    { id: 2, title: "Whispers of Time", author: "Nova Hart" },
-    { id: 3, title: "Finding Luna", author: "Ezra Hale" },
-    { id: 4, title: "Dust & Daydreams", author: "Mira Solis" },
-    { id: 5, title: "Paper Hearts", author: "Jude Rowan" },
-    { id: 6, title: "Beyond the Pages", author: "Elle Carter" },
-    { id: 7, title: "A Room Full of Stories", author: "Kai Moon" },
-    { id: 8, title: "The Last Bookmark", author: "Lena Cross" },
-    { id: 9, title: "Chapters of Us", author: "Sage Rivers" },
-    { id: 10, title: "Whispers in Ink", author: "Arlo James" },
-    { id: 11, title: "The Bookmaker’s Daughter", author: "Faye Arden" },
-    { id: 12, title: "Eternal Letters", author: "Rowan Vale" },
-    { id: 13, title: "Woven Tales", author: "Sienna Vale" },
-    { id: 14, title: "The Lost Manuscript", author: "Theo Quinn" },
-    { id: 15, title: "Moonlit Stories", author: "Ivy Storm" },
-    { id: 16, title: "Inkbound", author: "Callum Frost" },
-    { id: 17, title: "Velvet Pages", author: "Lyra Bloom" },
-    { id: 18, title: "A Shelf of Suns", author: "Elias Wren" },
-    { id: 19, title: "Wildflower Books", author: "Willa Jade" },
-    { id: 20, title: "Autumn Chapters", author: "Finn Hale" },
+ const fallbackBooks = [
+    { id: 1, title: "Atomic Habits", author: "James Clear", rented: false },
+    { id: 2, title: "The Alchemist", author: "Paulo Coelho", rented: true },
+    { id: 3, title: "Ikigai", author: "Héctor García", rented: false },
+    { id: 4, title: "The Psychology of Money", author: "Morgan Housel", rented: false },
+    { id: 5, title: "Rich Dad Poor Dad", author: "Robert Kiyosaki", rented: true },
+    { id: 6, title: "Deep Work", author: "Cal Newport", rented: false },
+    { id: 7, title: "Do Epic Shit", author: "Ankur Warikoo", rented: false },
+    { id: 8, title: "The Subtle Art of Not Giving a F*ck", author: "Mark Manson", rented: false },
+    { id: 9, title: "Wings of Fire", author: "A.P.J. Abdul Kalam", rented: false },
+    { id: 10, title: "The Power of Now", author: "Eckhart Tolle", rented: true },
+    { id: 11, title: "Start With Why", author: "Simon Sinek", rented: false },
+    { id: 12, title: "Think and Grow Rich", author: "Napoleon Hill", rented: false },
+    { id: 13, title: "Harry Potter and the Sorcerer’s Stone", author: "J.K. Rowling", rented: true },
+    { id: 14, title: "The Hobbit", author: "J.R.R. Tolkien", rented: false },
+    { id: 15, title: "1984", author: "George Orwell", rented: false },
+    { id: 16, title: "To Kill a Mockingbird", author: "Harper Lee", rented: false },
+    { id: 17, title: "The Fault in Our Stars", author: "John Green", rented: false },
+    { id: 18, title: "Becoming", author: "Michelle Obama", rented: true },
+    { id: 19, title: "The Lean Startup", author: "Eric Ries", rented: false },
+    { id: 20, title: "The Monk Who Sold His Ferrari", author: "Robin Sharma", rented: false },
   ];
 
-  // fetch books from backend, else fallback
+  // Set books state on mount
   useEffect(() => {
-    fetch("http://localhost:5000/books?limit=20")
-      .then((res) => res.json())
-      .then((data) => setBooks(data))
-      .catch(() => setBooks(fallbackBooks));
+    setBooks(fallbackBooks);
   }, []);
 
   return (
@@ -91,6 +88,14 @@ const Home = () => {
               <p className="text-[#A18D7A] text-sm mt-1">
                 {book.genre || "Fiction"}
               </p>
+               {/* Rented / Available Badge */}
+        <span
+          className={`inline-block mt-4 px-3 py-1 text-sm font-semibold rounded-full ${
+            book.rented ? "bg-red-300 text-red-800" : "bg-green-300 text-green-800"
+          }`}
+        >
+          {book.rented ? "Rented" : "Available"}
+        </span>
             </div>
           ))}
       </div>
